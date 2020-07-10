@@ -2,7 +2,7 @@
     "name": "ournameismud/current-see",
     "description": "Plugin to generate externally accessible feed of versions",
     "type": "craft-plugin",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "keywords": [
         "craft",
         "cms",
