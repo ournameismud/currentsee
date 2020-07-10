@@ -57,7 +57,7 @@ class CurrentSeeService extends Component
                 $record->save();                
             } else {
 
-                PluginRecord::model()->deleteAll('user_id = :user_id', array(':user_id' => $user->id));
+                // PluginRecord::find()->deleteAll('user_id = :user_id', array(':user_id' => $user->id));
                 $record = PluginRecord::find()->where(['namespace' => $plugin->packageName])->one();
                 $record->delete();
 
