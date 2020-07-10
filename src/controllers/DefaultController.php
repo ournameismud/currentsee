@@ -80,6 +80,8 @@ class DefaultController extends Controller
 
             $plugin = $dom->createElement('plugin');
             $plugins->appendChild($plugin);
+            $plugin->appendChild($dom->createElement('name', $record->name));
+            $plugin->appendChild($dom->createElement('handle', $record->handle));
             $plugin->appendChild($dom->createElement('package', $record->namespace));
             $plugin->appendChild($dom->createElement('local', $record->current));
             $plugin->appendChild($dom->createElement('remote', $record->latest));
