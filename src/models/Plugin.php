@@ -28,7 +28,9 @@ class Plugin extends Model
     /**
      * @var string
      */
-    public $namespace = '',
+    public $name = '',
+        $handle = '',
+        $namespace = '',
         $current = '',
         $latest = '';
 
@@ -41,7 +43,7 @@ class Plugin extends Model
     public function rules()
     {
         return [
-            [['namespace','current','latest'], 'string']
+            [['name','handle','namespace','current','latest'], 'string']
         ];
     }
 }

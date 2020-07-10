@@ -79,6 +79,8 @@ class Install extends Migration
                 '{{%currentsee_plugin}}',
                 [
                     'id' => $this->primaryKey(),
+                    'name' => $this->string(255)->notNull()->defaultValue(''),
+                    'handle' => $this->string(255)->notNull()->defaultValue(''),
                     'namespace' => $this->string(255)->notNull()->defaultValue(''),
                     'current' => $this->string(255)->notNull()->defaultValue(''),
                     'latest' => $this->string(255)->notNull()->defaultValue(''),

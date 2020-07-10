@@ -47,8 +47,10 @@ class CurrentSeeService extends Component
                 // save as record
                 $record = PluginRecord::find()->where( array('namespace' => $plugin->packageName) )->one();
                 if (!$record) {
-                    $record = new PluginRecord;                    
-                } 
+                    $record = new PluginRecord;
+                }
+                $record->setAttribute('name', $plugin->name);
+                $record->setAttribute('handle', $plugin->id);
                 $record->setAttribute('namespace', $plugin->packageName);
                 $record->setAttribute('current', $plugin->version);
                 $record->setAttribute('latest', $latestVersion->version);
@@ -58,7 +60,7 @@ class CurrentSeeService extends Component
                 PluginRecord::model()->deleteAll('user_id = :user_id', array(':user_id' => $user->id));
                 $record = PluginRecord::find()->where(['namespace' => $plugin->packageName])->one();
                 $record->delete();
-                
+
             }
         }
     }
