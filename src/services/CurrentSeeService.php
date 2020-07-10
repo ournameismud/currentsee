@@ -37,29 +37,29 @@ class CurrentSeeService extends Component
     }
 
     public function compPlugin( $plugin ) {
-        
-        $endpoint = 'https://api.craftcms.com/v1/package/' . $plugin->packageName;
+        // object to array …
+        $endpoint = 'https://api.craftcms.com/v1/package/' . $plugin['packageName'];
         $response = $this->fetch( $endpoint );
         if (property_exists($response,'latestRelease') && isset($response->latestRelease)) {
             $latestVersion = $response->latestRelease;
-            $comp = version_compare($plugin->version, $latestVersion->version);
+            $comp = version_compare($plugin['version'], $latestVersion->version);
             if( $comp ) {
                 // save as record
-                $record = PluginRecord::find()->where( array('namespace' => $plugin->packageName) )->one();
+                $record = PluginRecord::find()->where( array('namespace' => $plugin['packageName']) )->one();
                 if (!$record) {
                     $record = new PluginRecord;
                 }
-                $record->setAttribute('name', $plugin->name);
-                $record->setAttribute('handle', $plugin->id);
-                $record->setAttribute('namespace', $plugin->packageName);
-                $record->setAttribute('current', $plugin->version);
+                $record->setAttribute('name', $plugin['name']);
+                $record->setAttribute('handle', $plugin['id']);
+                $record->setAttribute('namespace', $plugin['packageName']);
+                $record->setAttribute('current', $plugin['version']);
                 $record->setAttribute('latest', $latestVersion->version);
                 $record->save();                
             } else {
 
                 // PluginRecord::find()->deleteAll('user_id = :user_id', array(':user_id' => $user->id));
-                $record = PluginRecord::find()->where(['namespace' => $plugin->packageName])->one();
-                $record->delete();
+                $record = PluginRecord::find()->where(['namespace' => $plugin['packageName']])->one();
+                if ($record) $record->delete();
 
             }
         }

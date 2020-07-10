@@ -45,7 +45,10 @@ class DefaultController extends Controller
      * @return mixed
      */
     public function actionFeed()
-    {
+    {        
+        
+        $plugins = Craft::$app->getPlugins()->getAllPlugins();
+
         $request = Craft::$app->getRequest();
         $keyRemote = $request->getParam('key');
         
@@ -73,11 +76,7 @@ class DefaultController extends Controller
         $dom->appendChild( $plugins );
 
         foreach ($records as $record) {
-            // $loc = $this->getUrl($item['uri'], $item['siteId']);
-            // if ($loc === null) {
-            //     continue;
-            // }
-
+            
             $plugin = $dom->createElement('plugin');
             $plugins->appendChild($plugin);
             $plugin->appendChild($dom->createElement('name', $record->name));
@@ -87,47 +86,9 @@ class DefaultController extends Controller
             $plugin->appendChild($dom->createElement('remote', $record->latest));
             $date = new \DateTime( $record->dateUpdated );
             $plugin->appendChild($dom->createElement('updated', $date->format('c')));
-            // $url->appendChild($dom->createElement('priority', $item['priority']));
-            // $url->appendChild($dom->createElement('changefreq', $item['changefreq']));
-            // $dateUpdated = strtotime($item['dateUpdated']);
-            // $url->appendChild($dom->createElement('lastmod', date('Y-m-d\TH:i:sP', $dateUpdated)));
-            // if ($item['alternateLinkCount'] > 1) {
-            //     $alternateLinks = $this->_createAlternateSectionQuery($item['elementId'])->all();
-            //     if (count($alternateLinks) > 0) {
-            //         foreach ($alternateLinks as $alternateItem) {
-            //             $alternateLoc = $this->getUrl($alternateItem['uri'], $alternateItem['siteId']);
-            //             if ($alternateLoc === null) {
-            //                 continue;
-            //             }
-
-            //             $alternateLink = $dom->createElementNS('http://www.w3.org/1999/xhtml', 'xhtml:link');
-            //             $alternateLink->setAttribute('rel', 'alternate');
-            //             $alternateLink->setAttribute('hreflang', strtolower($alternateItem['siteLanguate']));
-            //             $alternateLink->setAttribute('href', $alternateLoc);
-            //             $url->appendChild($alternateLink);
-            //         }
-            //     }
-            // }
-        }
-
-        // foreach ($this->_createEntryCategoryQuery()->all() as $item) {
-        //     $loc = $this->getUrl($item['uri'], $item['siteId']);
-        //     if ($loc === null) {
-        //         continue;
-        //     }
-
-        //     $url = $dom->createElement('url');
-        //     $urlset->appendChild($url);
-        //     $url->appendChild($dom->createElement('loc', $loc));
-        //     $url->appendChild($dom->createElement('priority', $item['priority']));
-        //     $url->appendChild($dom->createElement('changefreq', $item['changefreq']));
-        //     $dateUpdated = strtotime($item['dateUpdated']);
-        //     $url->appendChild($dom->createElement('lastmod', date('Y-m-d\TH:i:sP', $dateUpdated)));
-
-
-        // }
+            
+        }        
         return $dom->saveXML();
-
 
     }
     

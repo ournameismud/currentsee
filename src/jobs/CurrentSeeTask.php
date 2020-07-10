@@ -36,6 +36,17 @@ class CurrentSeeTask extends BaseJob
      */
     public function execute($queue)
     {
+        
+
+        $version = Craft::$app->getVersion();
+        $craftCore = [
+            'packageName' => 'craftcms/cms',
+            'name' => 'craftcms',
+            'id' => 'cms',
+            'version' => $version,
+        ];
+        $response = CurrentSee::getInstance()->currentSeeService->compPlugin( $craftCore );
+        
         // get all plugins
         $plugins = Craft::$app->getPlugins()->getAllPlugins();
         $total = count($plugins);
@@ -44,6 +55,12 @@ class CurrentSeeTask extends BaseJob
         foreach ($plugins as $plugin) {
             $this->setProgress($queue, ($i + 1) / $total);
             // check plugin details
+            $plugin = [
+                'packageName' => $plugin->packageName,
+                'name' => $plugin->name,
+                'id' => $plugin->id,
+                'version' => $plugin->version,
+            ];
             $response = CurrentSee::getInstance()->currentSeeService->compPlugin( $plugin );
             // if ($response) $data[] = $response;
             $i++;
