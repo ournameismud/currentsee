@@ -1,0 +1,44 @@
+{
+    "name": "ournameismud/current-see",
+    "description": "Plugin to generate externally accessible feed of versions",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "current see"
+    ],
+    "support": {
+        "docs": "https://github.com/ournameismud/current-see/blob/master/README.md",
+        "issues": "https://github.com/ournameismud/current-see/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "@cole007",
+            "homepage": "https://ournameismud.co.uk/"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "ournameismud\\currentsee\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Current See",
+        "handle": "current-see",
+        "developer": "@cole007",
+        "developerUrl": "https://ournameismud.co.uk/",
+        "documentationUrl": "https://github.com/ournameismud/current-see/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/ournameismud/current-see/master/CHANGELOG.md",
+        "components": {
+            "currentSeeService": "ournameismud\\currentsee\\services\\CurrentSeeService"
+        },
+        "class": "ournameismud\\currentsee\\CurrentSee"
+    }
+}

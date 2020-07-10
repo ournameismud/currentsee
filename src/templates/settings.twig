@@ -1,0 +1,25 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Current See plugin for Craft CMS 3.x
+ *
+ * Current See Settings.twig
+ *
+ * @author    @cole007
+ * @copyright Copyright (c) 2020 @cole007
+ * @link      https://ournameismud.co.uk/
+ * @package   CurrentSee
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("ournameismud\\currentsee\\assetbundles\\currentsee\\CurrentSeeAsset") %}
+
+{{ forms.textField({
+    label: 'Api Key',
+    id: 'apiKey',
+    name: 'apiKey',
+    value: settings['apiKey']})
+}}
